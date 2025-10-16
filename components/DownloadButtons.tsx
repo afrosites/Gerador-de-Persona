@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { UserData, GeneratedContent } from '../types';
-import { generatePdfReport } from '../services/documentGenerator'; // Removed generateWordReport
-import { PdfIcon, LoadingSpinner, TrashIcon, WhatsAppIcon } from './IconComponents'; // Removed WordIcon
+import { generatePdfReport } from '../services/documentGenerator';
+import { PdfIcon, LoadingSpinner, TrashIcon, WhatsAppIcon } from './IconComponents';
 
 interface DownloadButtonsProps {
   userData: UserData;
@@ -12,7 +12,6 @@ interface DownloadButtonsProps {
 
 const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedContent, isJourneyComplete, onReset }) => {
   const [isPdfLoading, setIsPdfLoading] = useState(false);
-  // const [isWordLoading, setIsWordLoading] = useState(false); // Removed state for Word download
   const [error, setError] = useState<string | null>(null);
 
   const handleDownloadPdf = async () => {
@@ -27,8 +26,6 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
       setIsPdfLoading(false);
     }
   };
-
-  // Removed handleDownloadWord function
 
   const handleShareWhatsApp = () => {
     const brandName = userData.brandName || "minha marca";
@@ -49,11 +46,11 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
               : 'Você chegou a um marco importante. Faça o download do relatório consolidado com todas as análises até agora ou compartilhe. O próximo passo é gerar um plano de implementação.'}
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row justify-start items-center gap-4 pt-2">
           <button
             type="button"
             onClick={handleDownloadPdf}
-            disabled={isPdfLoading} // Updated disabled prop
+            disabled={isPdfLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-rose-700 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isPdfLoading ? (
@@ -63,11 +60,10 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
             )}
             {isPdfLoading ? 'Gerando PDF...' : 'Baixar Relatório em PDF'}
           </button>
-          {/* Removed Word download button */}
           <button
             type="button"
             onClick={handleShareWhatsApp}
-            disabled={isPdfLoading} // Updated disabled prop
+            disabled={isPdfLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <WhatsAppIcon className="h-5 w-5" />
@@ -76,7 +72,7 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
           <button
             type="button"
             onClick={onReset}
-            disabled={isPdfLoading} // Updated disabled prop
+            disabled={isPdfLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-gray-800 px-4 py-3 text-sm font-semibold text-gray-300 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <TrashIcon className="h-5 w-5" />
