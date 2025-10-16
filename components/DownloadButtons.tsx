@@ -60,7 +60,7 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
               : 'Você chegou a um marco importante. Faça o download do relatório consolidado com todas as análises até agora ou compartilhe. O próximo passo é gerar um plano de implementação.'}
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
           <button
             type="button"
             onClick={handleDownloadPdf}
