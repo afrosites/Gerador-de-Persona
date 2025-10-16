@@ -1,4 +1,4 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai"; // Removed 'Type'
 import type { UserData, GeneratedContent } from '../types';
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });

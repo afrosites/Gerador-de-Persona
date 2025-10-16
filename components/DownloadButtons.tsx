@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { UserData, GeneratedContent } from '../types';
-import { generatePdfReport } from '../services/documentGenerator';
-import { PdfIcon, LoadingSpinner, TrashIcon, WhatsAppIcon } from './IconComponents';
+import { generatePdfReport, generateWordReport } from '../services/documentGenerator';
+import { PdfIcon, LoadingSpinner, TrashIcon, WhatsAppIcon, WordIcon } from './IconComponents';
 
 interface DownloadButtonsProps {
   userData: UserData;
@@ -12,6 +12,7 @@ interface DownloadButtonsProps {
 
 const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedContent, isJourneyComplete, onReset }) => {
   const [isPdfLoading, setIsPdfLoading] = useState(false);
+  const [isWordLoading, setIsWordLoading] = useState(false); // New state for Word download
   const [error, setError] = useState<string | null>(null);
 
   const handleDownloadPdf = async () => {
@@ -24,6 +25,19 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
       setError('Ocorreu um erro ao gerar o PDF. Por favor, tente novamente.');
     } finally {
       setIsPdfLoading(false);
+    }
+  };
+
+  const handleDownloadWord = async () => {
+    setError(null);
+    setIsWordLoading(true);
+    try {
+      await generateWordReport(userData, generatedContent);
+    } catch (err) {
+      console.error('Failed to generate Word report:', err);
+      setError('Ocorreu um erro ao gerar o DOCX. Por favor, tente novamente.');
+    } finally {
+      setIsWordLoading(false);
     }
   };
 
@@ -50,7 +64,7 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
           <button
             type="button"
             onClick={handleDownloadPdf}
-            disabled={isPdfLoading}
+            disabled={isPdfLoading || isWordLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-rose-700 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isPdfLoading ? (
@@ -62,8 +76,21 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
           </button>
           <button
             type="button"
+            onClick={handleDownloadWord}
+            disabled={isWordLoading || isPdfLoading}
+            className="inline-flex items-center justify-center gap-x-2 rounded-md bg-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {isWordLoading ? (
+                <LoadingSpinner className="h-5 w-5" />
+            ) : (
+                <WordIcon className="h-5 w-5" />
+            )}
+            {isWordLoading ? 'Gerando DOCX...' : 'Baixar Relatório em DOCX'}
+          </button>
+          <button
+            type="button"
             onClick={handleShareWhatsApp}
-            disabled={isPdfLoading}
+            disabled={isPdfLoading || isWordLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <WhatsAppIcon className="h-5 w-5" />
@@ -72,7 +99,7 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({ userData, generatedCo
           <button
             type="button"
             onClick={onReset}
-            disabled={isPdfLoading}
+            disabled={isPdfLoading || isWordLoading}
             className="inline-flex items-center justify-center gap-x-2 rounded-md bg-gray-800 px-4 py-3 text-sm font-semibold text-gray-300 shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <TrashIcon className="h-5 w-5" />
