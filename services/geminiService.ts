@@ -139,7 +139,7 @@ export const generateAudienceResearch = async (niche: string, targetAudience: st
 
 
 export const generateCompetitiveAnalysis = async (niche: string, subNiche: string): Promise<string> => {
-    const prompt = `
+  const prompt = `
     Como um analista competitivo e de UX, analise 3 sites de sucesso no nicho de "${niche}", com foco específico em "${subNiche}".
     Para cada site, forneça uma análise concisa e estratégica. Use seu conhecimento pré-existente sobre marcas e padrões de web design.
     Formate a resposta em Markdown.
