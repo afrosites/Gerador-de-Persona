@@ -1,7 +1,7 @@
-import { GoogleGenAI } from "@google/genai"; // Removed 'Type'
+import { GoogleGenAI } from "@google/genai";
 import type { UserData, GeneratedContent } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
 
 const callGemini = async (prompt: string, expectJson: boolean = false): Promise<string> => {
   const response = await ai.models.generateContent({
@@ -164,7 +164,7 @@ export const generateCompetitiveAnalysis = async (niche: string, subNiche: strin
     *   **Análise Geral:** Qual é a primeira impressão e a proposta de valor clara do site?
     *   **Estrutura e Navegação:** A navegação é intuitiva? Como a informação está organizada?
     *   **Design e UI:** O design é moderno? A paleta de cores e tipografia são eficazes?
-    *   **Conteúdo e Mensagem:** Qual o tom de voz? O conteúdo é engajante e persuasivo?
+    *   **Conteúdo e Mensagem:** Qual o tone de voz? O conteúdo é engajante e persuasivo?
     *   **Experiência do Usuário (UX):** O site é rápido? É fácil encontrar o que se procura e completar uma ação (ex: comprar, contatar)?
     *   **Principal Insight Acionável:** Qual é a principal lição ou tática que podemos aprender e adaptar deste concorrente?
     
