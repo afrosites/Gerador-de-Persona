@@ -5,7 +5,6 @@ import { generateNicheAnalysis, generateAudienceResearch, generateCompetitiveAna
 import Stepper from './components/Stepper';
 import StepRenderer from './components/StepRenderer';
 import DownloadButtons from './components/DownloadButtons';
-import AnimatedFistLogo from './components/AnimatedFistLogo'; // Importando o novo componente
 
 const LOCAL_STORAGE_KEY = 'afroSitesProgress';
 
@@ -192,14 +191,18 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#191919] text-gray-100 flex flex-col md:flex-row font-sans">
       <header className="md:hidden p-4 bg-[#1e1f1f] border-b border-gray-700 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <AnimatedFistLogo size="small" /> {/* Usando o novo componente */}
+            <div className="bg-[#D49929] p-2 rounded-lg">
+                <span className="text-xl" style={{ filter: 'grayscale(100%) brightness(60%) sepia(100%) hue-rotate(0deg) saturate(500%)' }}>✊🏽</span>
+            </div>
             <h1 className="text-xl font-bold text-white">Afro Sites</h1>
           </div>
       </header>
 
       <aside className="w-full md:w-80 bg-[#1e1f1f] p-6 border-r border-gray-700 hidden md:flex md:flex-col">
           <div className="flex items-center gap-3 mb-10">
-            <AnimatedFistLogo size="large" /> {/* Usando o novo componente */}
+            <div className="bg-[#D49929] p-3 rounded-lg">
+                <span className="text-2xl" style={{ filter: 'grayscale(100%) brightness(60%) sepia(100%) hue-rotate(0deg) saturate(500%)' }}>✊🏽</span>
+            </div>
             <h1 className="text-2xl font-bold text-white">Afro Sites</h1>
           </div>
           <Stepper 
