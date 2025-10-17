@@ -28,21 +28,6 @@ export const ArrowRightIcon: React.FC<IconProps> = ({ className }) => (
     </svg>
 );
 
-export const SankofaIcon: React.FC<IconProps> = ({ className }) => (
-  <svg
-    viewBox="0 0 100 100"
-    className={className}
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-label="Sankofa bird logo"
-  >
-    <path
-      d="M49.1,8.3C29.6,10.8,15,27.8,15,48.1c0,21.5,17.4,38.9,38.9,38.9c9.3,0,17.8-3.3,24.5-8.7 c-4.6,7.5-13.4,12.6-23.4,12.6c-15.4,0-27.9-12.5-27.9-27.9s12.5-27.9,27.9-27.9c6.4,0,12.3,2.2,16.9,5.8 c-3.9-12.6-16.1-21.7-29.8-20.3C52.4,8.1,50.7,8.2,49.1,8.3z M35.4,79.5c-3,0-5.5-2.5-5.5-5.5s2.5-5.5,5.5-5.5s5.5,2.5,5.5,5.5 S38.4,79.5,35.4,79.5z M64.6,79.5c-3,0-5.5-2.5-5.5-5.5s2.5-5.5,5.5-5.5s5.5,2.5,5.5,5.5S67.6,79.5,64.6,79.5z"
-    />
-  </svg>
-);
-
-
 export const LoadingSpinner: React.FC<IconProps> = ({ className }) => (
     <svg className={`animate-spin ${className}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
